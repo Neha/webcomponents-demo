@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Web components</title>
+  <link rel="import" href="template.html" />
+   <link rel="stylesheet" type="text/css" href="resources/style.css" />
+  <!-- <style type="text/css">
+	::shadow h3 {
+    	color: red;
+  	}
+  	my-panel::shadow .container{
+  		background:orange;
+  	}
+   </style> -->
+   <style>
+   	my-panel::shadow .container{
+   		margin:20px 0;
+   	}
+   </style>
+</head>
+<body>
+	<section id="container">
+		<header>
+			<h1>Web Components demo for JSLovers</h1>
+		</header>
+		<section class="content">
+			<my-panel>
+				 <img src="/resources/demo.jpeg" />
+			</my-panel>
+
+			<div class="one">
+				<div>
+					<h3>I am from the page</h3>
+					<button id="btn">CLICK ME</button>
+				</div>
+			</div>
+			
+		</section>
+	</section>
+<script type="text/javascript">
+var btn = document.getElementById('btn');
+	btn.addEventListener('click',function(e){
+		e.preventDefault();
+		var container = document.querySelector(".one");
+		container.style.backgroundColor = getRandomColor();
+	});
+
+	function getRandomColor() {
+	    var letters = '0123456789ABCDEF'.split('');
+	    var color = '#';
+	    for (var i = 0; i < 6; i++ ) {
+	        color += letters[Math.floor(Math.random() * 16)];
+	    }
+	    return color;
+}
+</script> 
+</body>
+</html>

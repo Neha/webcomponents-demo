@@ -1,0 +1,107 @@
+<template id="my-panel">
+  <style>
+:host{
+        background:#eee;
+        display: flex;
+       justify-content:center;
+       text-align: center;
+  }
+   
+    small{
+      color:#000;
+      margin: 10px 0;
+      display: block;
+    }
+    .gray{
+        -webkit-filter: grayscale(50%);
+    }
+    .blur{
+      -webkit-filter: blur(20px);
+    }
+    .saturate{
+       -webkit-filter: saturate(20);
+    }
+    .hue-rotate{
+       -webkit-filter: hue-rotate(50deg);
+    }
+     .drop-shadow{
+       -webkit-filter: drop-shadow(16px 16px 10px rgba(0,0,0,0.9));
+    }
+    .buttonContainer{
+      margin:20px 0; 
+    }
+
+  .buttonContainer button{
+    padding:10px;
+    border:0;
+    border-radius: 3px;
+    background:#ff6f00;
+    color: #fff;
+    font-size:14px;
+    box-shadow: 1px 1px 1px #e65100;
+    min-width:100px;
+    text-shadow:1px 2px 1px #e65100;
+    cursor: pointer;
+  }
+
+  .buttonContainer button:hover{
+    background:#f57f17;
+  }
+  h3{
+    font-size:24px;
+  }
+
+  button:focus{
+    border:0;
+    outline: 0;
+  }
+  </style>
+    <div class="container">
+    <div class="one">
+        <h3>Explore the CSS3 Filters!!</h3>
+        <small>(I'm custom element)</small>
+          <div id="gallery">
+           <content></content>
+          </div>
+        <div class="buttonContainer">
+          <button id="gray">I love Gray</button>
+          <button id="blur">I love Blur</button>
+          <button id="saturate">Saturate</button>
+          <button id="hue-rotate">Hue rotate</button>
+          <button id="drop-shadow">Drop Shadow</button>
+        </div>
+  </div>
+    </div>
+  </template>
+
+  <script type="text/javascript">
+var Panel = Object.create(HTMLElement.prototype);
+
+Panel.createdCallback = function(){
+    var root = this.createShadowRoot(),
+        link = document.querySelector('link[rel="import"]'),
+        content = link.import.querySelector('#my-panel'),
+        clone = document.importNode(content.content, true);
+     
+    root.appendChild(clone);
+
+    var btn = root.querySelectorAll('button');
+    
+    for(var i =0; i < btn.length; i++){
+        btn[i].addEventListener('click',function(e){
+            var that = this,
+                id = that.id,
+                imgContainer = root.querySelector('#gallery');
+                imgContainer.className = "";
+                imgContainer.className = id;
+        });
+      }
+    }
+
+var panelComp = document.registerElement('my-panel',{
+    prototype : Panel
+});
+
+
+
+</script>
